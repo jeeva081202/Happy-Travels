@@ -1,0 +1,50 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<section class="hero">
+    <div class="hero-spacer" aria-hidden="true"></div>
+</section>
+
+<main class="container py-5">
+    <div class="section-heading">
+        <h2>Why Choose Happy Travels</h2>
+        <a href="{% url 'routes' %}">Browse routes</a>
+    </div>
+    <div class="feature-grid">
+        <div><h3>Fast Booking</h3><p>Search, compare, select seats, and confirm tickets in a clean booking flow.</p></div>
+        <div><h3>Live Seats</h3><p>Seat availability updates instantly while passengers complete booking.</p></div>
+        <div><h3>QR Tickets</h3><p>Every confirmed booking includes a verification-ready digital ticket.</p></div>
+    </div>
+
+    <div class="section-heading mt-5">
+        <h2>Platform Modules</h2>
+        <span>Passenger and admin features</span>
+    </div>
+    <div class="module-grid">
+        <a class="module-card" href="{% url 'routes' %}"><span>Route Search</span><b>01</b><small>Find services and fare details</small></a>
+        <a class="module-card" href="{% url 'booking_history' %}"><span>Bookings</span><b>02</b><small>View tickets and cancellations</small></a>
+        <a class="module-card" href="{% url 'complaints' %}"><span>Support</span><b>03</b><small>Raise and track complaints</small></a>
+        <a class="module-card" href="{% url 'dashboard' %}"><span>Admin</span><b>04</b><small>Analytics and operations</small></a>
+    </div>
+
+    <div class="feature-grid mt-5">
+        <div><h3>Smart Suggestions</h3><p>Recommends faster and cost-friendly options based on demand patterns.</p></div>
+        <div><h3>Customer Friendly</h3><p>Profile, favorites, reviews, notifications and support are included.</p></div>
+        <div><h3>Admin Ready</h3><p>Revenue, occupancy, route performance and management modules are ready.</p></div>
+    </div>
+
+    <div class="experience-band mt-5">
+        <div>
+            <span class="eyebrow">Extra Features</span>
+            <h2>Everything needed for a premium booking experience.</h2>
+        </div>
+        <div class="mini-feature-grid">
+            <span>Instant E-Ticket</span>
+            <span>Live Bus Tracking</span>
+            <span>Easy Cancellation</span>
+            <span>Secure Payment</span>
+            <span>Seat Preference</span>
+            <span>24/7 Support</span>
+        </div>
+    </div>
+</main>
+{% endblock %}

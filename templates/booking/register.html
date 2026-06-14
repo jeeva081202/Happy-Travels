@@ -1,0 +1,28 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="auth-shell">
+    <form method="post" class="auth-card">
+        {% csrf_token %}
+        <h1>Create Account</h1>
+        {% if form.errors %}
+        <div class="form-error-box">
+            Please fix the highlighted details and try again.
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div><strong>{{ field.label }}:</strong> {{ error }}</div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% for field in form %}
+        <p>
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+        </p>
+        {% endfor %}
+        <button class="btn btn-primary w-100">Register</button>
+    </form>
+</main>
+{% endblock %}

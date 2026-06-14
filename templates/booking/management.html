@@ -1,0 +1,21 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="container py-5">
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">Enterprise Admin</span>
+            <h1>Operations Modules</h1>
+        </div>
+        <a class="btn btn-outline-primary" href="{% url 'dashboard' %}">Analytics</a>
+    </div>
+    <div class="module-grid">
+        {% for module in modules %}
+        <a class="module-card" href="{% url 'module_list' module.slug %}">
+            <span>{{ module.title }}</span>
+            <b>{{ module.count }}</b>
+            <small>Open sub module</small>
+        </a>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

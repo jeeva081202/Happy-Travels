@@ -1,0 +1,28 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="container py-5">
+    <section class="ticket-card ticket-premium">
+        <div class="ticket-main">
+            <span class="eyebrow">Happy Travels E-Ticket</span>
+            <h1>{{ booking.booking_reference }}</h1>
+            <div class="ticket-route">{{ booking.trip.route.source }} <span>to</span> {{ booking.trip.route.destination }}</div>
+            <div class="ticket-meta">
+                <span>{{ booking.travel_date }}</span>
+                <span>{{ booking.trip.departure_time }}</span>
+                <span>{{ booking.trip.bus.category }}</span>
+            </div>
+            <div class="seat-chip-row mt-3">
+                {% for seat in booking.seats.all %}<span class="seat-chip">Seat {{ seat.seat_number }}</span>{% endfor %}
+            </div>
+            <div class="passenger-list mt-3">
+                {% for passenger in booking.passengers.all %}
+                <span>{{ passenger.name }} <small>{{ passenger.age }} yrs | {{ passenger.gender }}</small></span>
+                {% endfor %}
+            </div>
+            <div class="ticket-total">Paid: INR {{ booking.total_amount }}</div>
+        </div>
+        <div class="qr-box"><span>QR Payload</span>{{ booking.ticket.qr_payload }}</div>
+    </section>
+    <a class="btn btn-primary mt-4" href="{% url 'download_ticket' booking.booking_reference %}">Download Ticket</a>
+</main>
+{% endblock %}

@@ -1,0 +1,8 @@
+<!doctype html>
+<title>{{ booking.booking_reference }}</title>
+<h1>Happy Travels E-Ticket</h1>
+<p>Reference: {{ booking.booking_reference }}</p>
+<p>Route: {{ booking.trip.route.source }} to {{ booking.trip.route.destination }}</p>
+<p>Date: {{ booking.travel_date }}</p>
+<p>Amount: {{ booking.total_amount }}</p>
+<p>QR: {{ booking.ticket.qr_payload }}</p>

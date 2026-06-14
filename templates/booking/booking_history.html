@@ -1,0 +1,46 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="container py-5">
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">My Trips</span>
+            <h1>Booking History</h1>
+        </div>
+    </div>
+    <div class="stack mt-4">
+        {% for booking in bookings %}
+        <article class="booking-card">
+            <div class="booking-card-head">
+                <div>
+                    <span class="service-badge">{{ booking.trip.bus.category }}</span>
+                    <h2>{{ booking.booking_reference }}</h2>
+                </div>
+                <span class="status {{ booking.status|lower }}">{{ booking.status }}</span>
+            </div>
+            <div class="booking-card-body">
+                <div>
+                    <strong>{{ booking.trip.route.source }} -> {{ booking.trip.route.destination }}</strong>
+                    <p>{{ booking.travel_date }} | {{ booking.trip.departure_time }} | {{ booking.trip.bus.name }}</p>
+                </div>
+                <div class="seat-chip-row">
+                    {% for seat in booking.seats.all %}<span class="seat-chip">Seat {{ seat.seat_number }}</span>{% endfor %}
+                </div>
+                <div class="passenger-list">
+                    {% for passenger in booking.passengers.all %}
+                    <span>{{ passenger.name }} <small>{{ passenger.age }} yrs</small></span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="booking-card-actions">
+                <b>INR {{ booking.total_amount }}</b>
+                <a class="btn btn-outline-primary" href="{{ booking.get_absolute_url }}">Ticket</a>
+                <a class="btn btn-outline-primary" href="{% url 'add_review' booking.trip.id %}">Review</a>
+                {% if booking.status == "CONFIRMED" %}<a class="btn btn-outline-danger" href="{% url 'cancel_booking' booking.booking_reference %}">Cancel</a>{% endif %}
+            </div>
+        </article>
+        {% empty %}
+        <div class="empty-state">Your journeys will appear here after booking.</div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

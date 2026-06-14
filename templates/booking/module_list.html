@@ -1,0 +1,33 @@
+{% extends "booking/base.html" %}
+{% load booking_extras %}
+{% block content %}
+<main class="container py-5">
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">Sub Module</span>
+            <h1>{{ module.title }}</h1>
+        </div>
+        <a class="btn btn-outline-primary" href="/admin/booking/">Django Admin</a>
+    </div>
+    <div class="table-panel">
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        {% for field in fields %}<th>{{ field|title }}</th>{% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        {% for field in fields %}<td>{{ row|attr:field|truncatechars:80 }}</td>{% endfor %}
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="{{ fields|length }}">No records available.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+{% endblock %}

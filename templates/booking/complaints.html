@@ -1,0 +1,28 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="container py-5">
+    <div class="booking-layout">
+        <section>
+            <h1>Complaint Management</h1>
+            <div class="stack mt-4">
+                {% for complaint in complaints %}
+                <article class="route-card">
+                    <div><strong>{{ complaint.subject }}</strong><span>{{ complaint.message }}</span></div>
+                    <b>{{ complaint.status }}</b>
+                </article>
+                {% empty %}
+                <div class="empty-state">No complaints submitted.</div>
+                {% endfor %}
+            </div>
+        </section>
+        <aside class="checkout-panel">
+            <h2>Raise Complaint</h2>
+            <form method="post" class="stack-sm">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </aside>
+    </div>
+</main>
+{% endblock %}

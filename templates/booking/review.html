@@ -1,0 +1,12 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="auth-shell">
+    <form method="post" class="auth-card">
+        {% csrf_token %}
+        <span class="eyebrow">Customer Review</span>
+        <h1>{{ trip.route.source }} -> {{ trip.route.destination }}</h1>
+        {{ form.as_p }}
+        <button class="btn btn-primary w-100">Save Review</button>
+    </form>
+</main>
+{% endblock %}

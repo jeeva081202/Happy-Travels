@@ -1,0 +1,33 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="container py-5">
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">Operations Control</span>
+            <h1>Admin Analytics</h1>
+        </div>
+        <a class="btn btn-primary" href="{% url 'management_center' %}">Open Modules</a>
+    </div>
+    <div class="metric-grid mt-4">
+        <div><span>Bookings</span><b>{{ stats.bookings }}</b></div>
+        <div><span>Revenue</span><b>INR {{ stats.revenue }}</b></div>
+        <div><span>Cancelled</span><b>{{ stats.cancelled }}</b></div>
+        <div><span>Routes</span><b>{{ stats.routes }}</b></div>
+    </div>
+    <h2 class="mt-5">Modules and Sub Modules</h2>
+    <div class="module-grid mt-3">
+        {% for module in modules %}
+        <a class="module-card" href="{% url 'module_list' module.slug %}">
+            <span>{{ module.title }}</span>
+            <b>{{ module.count }}</b>
+        </a>
+        {% endfor %}
+    </div>
+    <h2 class="mt-5">Route Performance</h2>
+    <div class="stack mt-3">
+        {% for route in route_performance %}
+        <article class="route-card"><div><strong>{{ route.source }} -> {{ route.destination }}</strong><span>{{ route.bookings }} bookings</span></div><b>{{ route.distance_km }} km</b></article>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

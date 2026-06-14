@@ -1,0 +1,42 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="container py-5">
+    <div class="booking-layout">
+        <section>
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">Live Seat Selection</span>
+                    <h1>{{ trip.route.source }} -> {{ trip.route.destination }}</h1>
+                    <p>{{ trip.bus.name }} | {{ trip.bus.category }} | {{ travel_date }}</p>
+                </div>
+            </div>
+            <div class="seat-legend">
+                <span><i class="legend available"></i>Available</span>
+                <span><i class="legend selected"></i>Selected</span>
+                <span><i class="legend booked"></i>Booked</span>
+            </div>
+            <div class="seat-map" id="seatMap">
+                {% for seat in seats %}
+                <button type="button" class="seat {% if seat.is_booked %}booked{% endif %}" data-seat="{{ seat.number }}" {% if seat.is_booked %}disabled{% endif %}>{{ seat.number }}</button>
+                {% endfor %}
+            </div>
+        </section>
+        <aside class="checkout-panel">
+            <span class="eyebrow">Checkout</span>
+            <h2>Passenger Details</h2>
+            <form method="post" id="bookingForm">
+                {% csrf_token %}
+                <input type="hidden" name="seats" id="selectedSeats">
+                <div class="selected-summary">
+                    <span>Selected Seats</span>
+                    <div id="selectedSeatChips" class="seat-chip-row"><em>No seats selected</em></div>
+                </div>
+                <div id="passengerFields" class="stack-sm"></div>
+                <div class="fare-line"><span>Fare per seat</span><b>INR {{ fare }}</b></div>
+                <div class="fare-line"><span>Total</span><b id="fareTotal">INR 0</b></div>
+                <button class="btn btn-primary w-100" id="payButton" disabled>Book Ticket</button>
+            </form>
+        </aside>
+    </div>
+</main>
+{% endblock %}

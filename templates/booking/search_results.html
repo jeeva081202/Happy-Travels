@@ -1,0 +1,37 @@
+{% extends "booking/base.html" %}
+{% block title %}Search Buses{% endblock %}
+{% block content %}
+<main class="container py-5">
+    <div class="section-heading">
+        <div>
+            <span class="eyebrow">Choose Your Ride</span>
+            <h1>Available Buses</h1>
+        </div>
+        <span class="date-pill">{{ travel_date }}</span>
+    </div>
+    <div class="stack">
+        {% for trip in trips %}
+        <article class="bus-result premium-result">
+            <div class="bus-main">
+                <span class="service-badge">{{ trip.bus.category }}</span>
+                <h2>{{ trip.bus.name }}</h2>
+                <p>{{ trip.bus.amenities }}</p>
+                <strong>{{ trip.route.source }} -> {{ trip.route.destination }}</strong>
+                <div class="amenity-row">
+                    <span>Live seats</span><span>QR ticket</span><span>Secure pay</span>
+                </div>
+            </div>
+            <div class="time-box"><b>{{ trip.departure_time }}</b><span>Boarding</span><small>Main Stand</small></div>
+            <div class="time-box"><b>{{ trip.arrival_time }}</b><span>Dropping</span><small>Central Stop</small></div>
+            <div class="price-box">
+                <b>INR {{ trip.fare }}</b>
+                <span class="seats-left">{{ trip.bus.total_seats }} seat layout</span>
+                <a class="btn btn-primary" href="{% url 'select_seat' trip.id travel_date|date:'Y-m-d' %}">Select Seats</a>
+            </div>
+        </article>
+        {% empty %}
+        <div class="empty-state">No direct buses found. Try another source, destination, or travel date.</div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

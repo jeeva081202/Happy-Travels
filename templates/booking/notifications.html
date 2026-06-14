@@ -1,0 +1,19 @@
+{% extends "booking/base.html" %}
+{% block content %}
+<main class="container py-5">
+    <h1>Travel Notifications</h1>
+    <div class="stack mt-4">
+        {% for item in notifications %}
+        <article class="route-card">
+            <div>
+                <strong>{{ item.title }}</strong>
+                <span>{{ item.message }}</span>
+            </div>
+            <b>{{ item.audience }}</b>
+        </article>
+        {% empty %}
+        <div class="empty-state">No notifications yet.</div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
